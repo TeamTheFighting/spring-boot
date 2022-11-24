@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApiService {
 	
-	
 	/**
 	 * @Since : 2022. 11. 23.
 	 * @Author : mr.Hyun

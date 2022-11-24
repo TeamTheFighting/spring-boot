@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 //Rest : 자원 (== 데이터)
 @RestController
 public class ApiController {
+	
+	//@Autowired : Spring에서 객체를 관리함 (IoC : Inversion of Control 제어 역전) 
+	@Autowired
+	ApiService apiService; //클래스를 전역변수로
+	
 	/*
 	 * 클래스 이름 : 앞에 대문자로 시작 ex) Apple (o) apple (x)
 	 * 변수 명 : 상수를 제외한 변수 이름은 소문자 : String name (o) String Name (x)
@@ -59,9 +67,8 @@ public class ApiController {
 	//URL 이름은 중복될 수 없다.
 	@GetMapping("/api/v1/movies")
 	public List<Movie> callMovies(){
-		ApiService service = new ApiService();//클래스 호출
 		
-		return service.makeMovies();
+		return apiService.makeMovies();
 	}
 	
 	//URL을 이용한 데이터 받는 방법
@@ -96,6 +103,16 @@ public class ApiController {
 		return map;
 	}
 	
+	//Post: 데이터를 받아서 생성할 때
+	@PostMapping("/api/v1/join")
+	public boolean callJoin(@RequestBody Login login) {
+		System.out.println("HTML에서 서버로 받아온 데이터입니다.");
+		System.out.println("아이디 : " + login.getUserId());
+		System.out.println("이메일 : " +login.getUserEmail());
+		System.out.println("비밀번호 : "+login.getUserPassword());
+		
+		return true;
+	}
 	
 	
 	
