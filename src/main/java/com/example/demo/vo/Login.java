@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.vo;
 
 //VO 클래스 : VO는 Value Object 줄임말
 //VO 클래스에는 필드변수와 getter, setter만 온다.

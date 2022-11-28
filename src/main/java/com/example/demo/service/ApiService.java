@@ -1,9 +1,11 @@
-package com.example.demo;
+package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.example.demo.vo.Movie;
 
 //Service : 서비스에서 로직(알고리즘)을 구현한다.
 //비즈니스 구역(로직)

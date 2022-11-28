@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table {
+	margin: 50px auto; width : 1000px;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	width: 1200px;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+	<h2>안녕하세요 여기는 EMP 화면 입니다.</h2>
+	<table>
+		<tr>
+			<th>사원번호</th>
+			<th>사원이름</th>
+			<th>직업</th>
+			<th>급여</th>
+			<th>입사날짜</th>
+		</tr>
+		<tbody id="data">
+		</tbody>
+	</table>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+	crossorigin="anonymous"></script>
+<script type="text/javascript">
+	callApi();
+	function callApi() {
+		$.ajax({
+			url : '/api/v1/emp',
+			type : 'GET',
+			dataType : 'json',
+			success : function(response) {
+				var html = '';
+				for (var i = 0; i < response.length; i++) {
+					html += '<tr><td>' + response[i].empno + '</td><td>'
+							+ response[i].ename + '</td><td>' + response[i].job
+							+ '</td><td>' + response[i].sal + '</td><td>'
+							+ response[i].hiredate + '</td></tr>';
+				}
+				$('#data').append(html);
+			}
+		});
+
+	}
+</script>
+</html>

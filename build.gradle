@@ -20,6 +20,10 @@ dependencies {
 	//롬복
 	annotationProcessor 'org.projectlombok:lombok'
 	compileOnly 'org.projectlombok:lombok'
+	//MySQL
+	runtimeOnly 'mysql:mysql-connector-java'
+	//ORM (내가 작성한 SQL 결과를 JAVA로 변환) Mybatis or JPA
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 }
 
 tasks.named('test') {
