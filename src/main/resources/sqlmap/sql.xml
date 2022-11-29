@@ -6,5 +6,10 @@
 	<select id="selectEmp" resultType="com.example.demo.vo.EmpVO">
 		SELECT * FROM emp
 	</select>
-		
+	
+	<!-- * : 아스테리크스 -->
+	<select id="selectDept" resultType="com.example.demo.vo.DeptVO">
+		SELECT * FROM dept
+	</select>
+
 </mapper>

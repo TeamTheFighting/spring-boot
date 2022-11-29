@@ -1,6 +1,6 @@
 package com.example.demo.vo;
 
-public class EmpVO {
+public class EmpVO extends BaseVO{
 
 	private int empno; //사원번호
 	private String ename; //사원이름
