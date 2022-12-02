@@ -25,6 +25,23 @@ tr:nth-child(even) {
 </head>
 <body>
 	<h2>안녕하세요 여기는 EMP 화면 입니다.</h2>
+	
+	<input id="empno" type="text" placeholder="사원번호를 입력하세요."/>
+	<input id="ename" type="text" placeholder="사원이름을 입력하세요."/>
+	<input id="job" type="text" placeholder="사원직책을 입력하세요."/>
+	<input id="sal" type="text" placeholder="사원급여를 입력하세요."/>
+	<button type="button" onclick="join()">사원 추가</button>
+	
+	<h3>사원 삭제</h3>
+	<input id="d_empno" type="text" placeholder="사원번호를 입력해주세요....."/>
+	<button type="button" onclick="doDelete()">사원 삭 to the 제</button>
+	
+	<h3>사원 수정</h3>
+	<input id="u_empno" type="text" placeholder="사원번호를 입력해주세요..."/>
+	<input id="u_job" type="text" placeholder="사원직책을 입력하세요."/>
+	<input id="u_sal" type="text" placeholder="사원급여를 입력하세요."/>
+	<button type="button" onclick="doUpdate()">수정🎄🎄</button>
+	
 	<table>
 		<tr>
 			<th>사원번호</th>
@@ -59,6 +76,94 @@ tr:nth-child(even) {
 			}
 		});
 	}
+	
+	
+	function join(){
+		var empno = $('#empno').val();
+		var ename = $('#ename').val();
+		var job = $('#job').val();
+		var sal = $('#sal').val();
+		
+		var jsonData = {
+			"empno" : empno,
+			"ename" : ename,
+			"job" : job,
+			"sal" : sal
+		};
+		
+		$.ajax({
+        	url: '/api/v1/emp/join',
+        	type: 'POST',
+        	contentType: 'application/json', //서버에 json 타입으로 보낼 예정(요청)
+        	data : JSON.stringify(jsonData),
+        	dataType: 'json',
+ 	        success: function (response) {
+ 	        	console.log(response);
+ 	        	alert('사원 추가 완료!');
+ 	        	location.reload(); //새로고침
+ 	        }
+        });
+	}
+	
+	
+	function doDelete(){
+		//문제 사원번호가 9999 넘으면 '잘못된 사원번호 입니다.' 라는 alert창 보여주기! 
+		// 제이쿼리 :  $('#d_empno').val();
+		// 바닐라 스크립트 : document.getElementById('d_empno').value;
+		var empno = $('#d_empno').val(); //input 데이터 가져오기
+		if(empno == ''){
+			alert('사원번호를 입력해주세요.');
+			$('#d_empno').focus();
+			return false;
+		}
+		if(empno > 9999){
+			alert('사원번호는 9999이하로 작성해주세요.');
+			$('#d_empno').focus();
+			$('#d_empno').val('');
+			return false;
+		}
+		
+		//사원 삭제 ajax 연결하기
+		$.ajax({
+			url: '/api/v1/emp/'+empno,
+        	type: 'DELETE',
+        	dataType: 'json',
+ 	        success: function (response) {
+ 	        	alert('사원 삭제 완료!🎃🎃');
+ 	        	location.reload(); //새로고침
+ 	        }	
+		});
+	}
+	
+	//UPDATE == INSERT
+	function doUpdate(){
+		var empno = $('#u_empno').val();
+		var sal = $('#u_sal').val();
+		var job =$('#u_job').val();
+		
+		var jsonData = {
+			"empno" : empno,
+			"job" : job,
+			"sal" : sal
+		};
+			
+			$.ajax({
+	        	url: '/api/v1/emp',
+	        	type: 'PATCH',
+	        	contentType: 'application/json', //서버에 json 타입으로 보낼 예정(요청)
+	        	data : JSON.stringify(jsonData),
+	        	dataType: 'json',
+	 	        success: function (response) {
+	 	        	alert('사원 수정 완료!');
+	 	        	location.reload(); //새로고침
+	 	        }
+	        });
+	}
+	
+	
+	
+	
+	
 	
 	
 </script>

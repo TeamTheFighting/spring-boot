@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.EmpMapper">
 
+	<!-- DML : SELECT,INSERT,UPDATE,DELETE -->
+
 	<!-- id는 mapper에 있는 메소드이름과 동일, 리턴타입은 VO 클래스!~ -->
 	<select id="selectEmp" resultType="com.example.demo.vo.EmpVO">
 		SELECT * FROM emp
@@ -11,5 +13,49 @@
 	<select id="selectDept" resultType="com.example.demo.vo.DeptVO">
 		SELECT * FROM dept
 	</select>
+
+	<!-- insert, update, delete는 retultType int -->
+	<insert id="insertEmp">
+		INSERT INTO emp 
+		(
+			empno,
+			ename,
+			job,
+			sal
+		)
+		VALUES
+		(
+			#{empno},
+			#{ename},
+			#{job},
+			#{sal}
+		)
+	</insert>
+	
+	<delete id="deleteEmp">
+		DELETE FROM emp
+		WHERE empno = #{empno}
+	</delete>
+	
+	<update id="updateEmp">
+		UPDATE emp
+		SET 
+			sal = #{sal},
+			job = #{job}
+		WHERE empno = #{empno}
+	</update>	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>
