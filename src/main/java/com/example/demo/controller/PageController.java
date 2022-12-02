@@ -44,9 +44,20 @@ public class PageController {
 		return "login2";
 	}
 	
+	@GetMapping("/login3")
+	public String callLoginPage3() {
+		return "login3";
+	}
+	
 	@GetMapping("/emp")
 	public String callEmpPage() {
 		return "emp";
 	}
+	
+	@GetMapping("/users")
+	public String callUsersPage() {
+		return "users";
+	}
+	
 	
 }

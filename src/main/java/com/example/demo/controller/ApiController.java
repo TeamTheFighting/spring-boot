@@ -24,7 +24,7 @@ import com.example.demo.vo.EmpVO;
 import com.example.demo.vo.Login;
 import com.example.demo.vo.Login2;
 import com.example.demo.vo.Movie;
-
+import com.example.demo.vo.UsersVO;
 
 /*
  * RestController와 Controller 차이점
@@ -178,5 +178,15 @@ public class ApiController {
 		return empMapper.updateEmp(emp);
 	}
 	
+	//회원 가입
+	@PostMapping("/api/v1/users")
+	public int callUsersJoin(@RequestBody UsersVO vo) {
+		return empMapper.insertUsers(vo);
+	}
+	//로그인
+	@PostMapping("/api/v1/login")
+	public int callUserLogin(@RequestBody UsersVO vo) {
+		return empMapper.selectUsersFindById(vo);
+	}
 	
 }

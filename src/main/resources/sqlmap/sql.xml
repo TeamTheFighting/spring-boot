@@ -46,16 +46,29 @@
 	</update>	
 
 
+	<!-- 회원가입 SQL 작성 -->
+	<insert id="insertUsers">
+		INSERT INTO users
+		(
+			id,
+			pw,
+			name
+		)
+		VALUES
+		(
+			#{id},
+			#{pw},
+			#{name}
+		)
+	</insert>
 
-
-
-
-
-
-
-
-
-
+	<!-- count는 int형으로 리턴 -->
+	<select id="selectUsersFindById" resultType="integer">
+		SELECT 
+			COUNT(*)
+		FROM users 
+		WHERE id = #{id} AND pw = #{pw}
+	</select>
 
 
 </mapper>
