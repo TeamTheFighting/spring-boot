@@ -7,6 +7,7 @@
 <body>
 	<h3>DW 회원가입</h3>
 	<input id="userId" type="text" placeholder="아이디를 입력해주세요..." />
+	<button type="button" onclick="doCheck()">아이디 체크</button>
 	<input id="userName" type="text" placeholder="이름을 입력해주세요..." />
 	<input id="userPw" type="password" placeholder="비밀번호를 입력해주세요...." />
 	<button type="button" onclick="doJoin()">회원가입</button>
@@ -22,7 +23,30 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
 
+	var isCheck = false;
 
+	//아이디 중복 체크 : 이미 가입된 아이디 찾기!
+	function doCheck(){
+		
+		var id = $('#userId').val();
+		$.ajax({
+			url : '/api/v1/users/'+id,
+			type : 'GET',
+			dataType : 'json',
+			success : function(response) {
+				//true면 이미 가입한 아이디가 존재!
+				if(response){
+					alert('이미 가입된 아이디입니다!');
+					return false;
+				}else{
+					alert('사용가능한 아이디입니다!');
+					isCheck = true;
+					return false;
+				}
+			}
+		});
+	}
+	
 	function doLogin() {
 		var id = $('#i_userId').val();
 		var pw = $('#i_userName').val();

@@ -67,7 +67,10 @@
 		SELECT 
 			COUNT(*)
 		FROM users 
-		WHERE id = #{id} AND pw = #{pw}
+		WHERE id = #{id} 
+		<if test="pw != null">
+			AND pw = #{pw}
+		</if>
 	</select>
 
 

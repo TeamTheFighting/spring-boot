@@ -40,6 +40,8 @@ import com.example.demo.vo.UsersVO;
 @RestController
 public class ApiController {
 	
+	final String ROOT_URL = "/api/v1";
+	
 	//@Autowired : Spring에서 객체를 관리함 (IoC : Inversion of Control 제어 역전) 
 	@Autowired
 	ApiService apiService; //클래스를 전역변수로
@@ -54,7 +56,7 @@ public class ApiController {
 	 * 상수 : final double PI = 3.14 (o), final double pi = 3.14 (x), 
 	 * 함수이름 : 명사 (x) 동사 (o) ex) function makeData(o) function data(x) 
 	 */
-	@GetMapping("/api/v1/sample")
+	@GetMapping(ROOT_URL+"/sample")
 	public List<String> callData(){
 		
 		List<String> list = new ArrayList<String>();
@@ -188,5 +190,17 @@ public class ApiController {
 	public int callUserLogin(@RequestBody UsersVO vo) {
 		return empMapper.selectUsersFindById(vo);
 	}
+	
+	@GetMapping("/api/v1/users/{id}")
+	public boolean callUser(@PathVariable String id) {
+		return apiService.checkUser(id);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

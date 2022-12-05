@@ -3,14 +3,36 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.mapper.EmpMapper;
 import com.example.demo.vo.Movie;
+import com.example.demo.vo.UsersVO;
 
 //Service : 서비스에서 로직(알고리즘)을 구현한다.
 //비즈니스 구역(로직)
 @Service
 public class ApiService {
+	
+	@Autowired
+	EmpMapper empMapper;
+	
+	
+	
+	public boolean checkUser(String id) {
+		
+		UsersVO vo = new UsersVO();
+		vo.setId(id);
+		
+		int rows = empMapper.selectUsersFindById(vo);
+		if(rows > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 	/**
 	 * @Since : 2022. 11. 23.
