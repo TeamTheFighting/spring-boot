@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -193,9 +194,34 @@ public class ApiController {
 	}
 	
 	//로그인
+	//세션 : 서버(자바 서블릿 컨테이너)에 임시적으로 데이터를 저장함
 	@PostMapping("/api/v1/login")
-	public int callUserLogin(@RequestBody UsersVO vo) {
-		return empMapper.selectUsersFindById(vo);
+	public UsersVO callUserLogin(@RequestBody UsersVO vo, HttpServletRequest req) {
+		
+		String password = vo.getPw();//HTML에서 가져온 패스워드
+		
+		vo = empMapper.selectUsersPassword(vo);
+		//아이디 틀리면 vo에 null 들어감
+		if(vo == null) {
+			vo = new UsersVO();
+			vo.setUser(false);
+		}
+		
+		String DBpassword = vo.getPw();//데이터베이스에 저장된 내 비밀번호 불러옴
+		boolean isUser = passwordEncoder.matches(password, DBpassword);
+		
+		if(!isUser) {
+			vo.setUser(false);
+			return vo;
+		}
+		//고객 정보 세션에 넣기
+		HttpSession session = req.getSession();//세션 불러오기
+		//세션은 key와 value로 구성 (HashMap과 동일)
+		//세션은 서버가 종료될 때 까지 데이터가 유지됨(디폴트로 가지고 있는 시간은 30분!)
+		session.setAttribute("name", vo.getName()); //세션에 사용자 이름 저장
+		
+		vo.setUser(true);
+		return vo;
 	}
 	
 	@GetMapping("/api/v1/users/{id}")

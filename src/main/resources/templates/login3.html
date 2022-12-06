@@ -61,9 +61,9 @@
 			data : JSON.stringify(jsonData),
 			dataType : 'json',
 			success : function(response) {
-				console.log(response);
-				if(response == 1){
+				if(response.user){
 					//페이지 이동 로직구현 예정
+					alert(response.name + ' 환영합니다. 🎉🎊🎉🎊');
 					location.href = '/users';
 				}else{
 					alert('아이디 혹은 비밀번호가 틀렸습니다!');

@@ -77,4 +77,16 @@ public interface EmpMapper {
  	 * @Comment : 회원인지 아닌지 체크
  	 */
  	int selectUsersFindById(UsersVO vo);
+ 	
+ 	
+ 	/**
+ 	 * @Since : 2022. 12. 6.
+ 	 * @Author : mr.Hyun
+ 	 * @Return : UsersVO
+ 	 * @Comment : 회원인지 아닌지 체크 (암호화 추가된 체크방법)
+ 	 */
+ 	UsersVO selectUsersPassword(UsersVO vo);
+ 	
+ 	
+ 	
 }
