@@ -24,6 +24,9 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	//ORM (내가 작성한 SQL 결과를 JAVA로 변환) Mybatis or JPA
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	//Spring security
+	implementation "org.springframework.security:spring-security-web"
+	implementation "org.springframework.security:spring-security-config"
 }
 
 tasks.named('test') {

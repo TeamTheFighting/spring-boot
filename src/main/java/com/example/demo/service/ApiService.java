@@ -19,20 +19,16 @@ public class ApiService {
 	EmpMapper empMapper;
 	
 	
-	
 	public boolean checkUser(String id) {
 		
 		UsersVO vo = new UsersVO();
 		vo.setId(id);
-		
 		int rows = empMapper.selectUsersFindById(vo);
 		if(rows > 0) {
 			return true;
 		}
 		return false;
 	}
-	
-	
 	
 	/**
 	 * @Since : 2022. 11. 23.

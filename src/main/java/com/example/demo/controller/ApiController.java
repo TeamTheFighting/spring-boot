@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -45,9 +46,11 @@ public class ApiController {
 	//@Autowired : Spring에서 객체를 관리함 (IoC : Inversion of Control 제어 역전) 
 	@Autowired
 	ApiService apiService; //클래스를 전역변수로
-	
 	@Autowired
 	EmpMapper empMapper;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder ;
 	
 	
 	/*
@@ -183,8 +186,12 @@ public class ApiController {
 	//회원 가입
 	@PostMapping("/api/v1/users")
 	public int callUsersJoin(@RequestBody UsersVO vo) {
+		String password = vo.getPw(); //HTML에서 입력받은 비밀번호를 가져옴
+		password = passwordEncoder.encode(password); //비밀번호 암호화(SHA-1)
+		vo.setPw(password);//암호화된 비밀번호 set!
 		return empMapper.insertUsers(vo);
 	}
+	
 	//로그인
 	@PostMapping("/api/v1/login")
 	public int callUserLogin(@RequestBody UsersVO vo) {
