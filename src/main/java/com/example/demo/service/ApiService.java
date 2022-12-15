@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.EmpMapper;
+import com.example.demo.vo.EmpVO;
 import com.example.demo.vo.Movie;
 import com.example.demo.vo.UsersVO;
 
@@ -64,5 +65,8 @@ public class ApiService {
 		
 		return list;
 	}
-
+public List<EmpVO> selectEmpfindByEmpno(int empno);{
+ 	
+ 	return empMapper.selectEmpfindByEmpno (int empno);
+}
 }

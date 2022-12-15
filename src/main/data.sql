@@ -1,0 +1,1 @@
+insert into users (id, pw, name) values ('홍길동', '123', '관리자');

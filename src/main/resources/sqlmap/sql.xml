@@ -82,6 +82,14 @@
 		FROM users
 		WHERE id = #{id}
 	</select>
-
+	
+	<select id="selectEmpfindByEmpno]" resultType="com.dw.emp.vo.EmpVO">
+	SELECT 
+		ifnull(sal ,100) AS sal,
+		ifnull(comm, 0) AS comm 
+		FROM emp
+		where empno = #{empno}
+	</select>
+	
 
 </mapper>

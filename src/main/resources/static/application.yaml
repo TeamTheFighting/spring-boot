@@ -1,0 +1,10 @@
+## 데이터 베이스 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:jdbc: mysql://localhost:3306/dw_501
+    username: root
+    password: tkddnjs0823
+
+##MYSQL
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
